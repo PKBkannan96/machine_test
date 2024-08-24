@@ -44,14 +44,12 @@ class Repository {
       // Save token to SharedPreferences
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('auth_token', response.token);
-      var responsr_reg =  await apiClient.registerDevice('pkb','3','1','2','pkb');
+      var responsr_reg =  await apiClient.registerDevice('test','3','1','2','test');
       await prefs.setInt('user_id', responsr_reg.guestUserId);
-      print('pkbTokenDevReg ${responsr_reg.message}');
-        var prolist =  await apiClient.getProductList('pkb', '3', '1', '1', '0', '10',);
-      print('pkbTokenPro ${prolist.products[0].productName}');
+        var prolist =  await apiClient.getProductList('test', '3', '1', '1', '0', '10',);
       return prolist;
     } catch (e) {
-      print('Login ErrorPkb: $e');
+      print('Login Error: $e');
       rethrow;
     }
   }
@@ -60,9 +58,9 @@ class Repository {
       throw 'No internet connection'; // Remove Exception() wrapper
     }
     try {
-      return await apiClient.getProductDetails('pkb', '3', '1',pro_id);
+      return await apiClient.getProductDetails('test', '3', '1',pro_id);
     } catch (e) {
-      print('Login ErrorPkb: $e');
+      print('Login Error: $e');
       rethrow;
     }
   }
@@ -73,9 +71,9 @@ class Repository {
     try {
       final prefs = await SharedPreferences.getInstance();
       final user_id = prefs.getInt('user_id');
-      return await apiClient.addProductCart('pkb', '3', user_id!,'1',variend_id,qty);
+      return await apiClient.addProductCart('test', '3', user_id!,'1',variend_id,qty);
     } catch (e) {
-      print('Login ErrorPkb: $e');
+      print('Login Error: $e');
       throw 'Order Limit Exceeded';
       rethrow;
     }
@@ -87,9 +85,9 @@ class Repository {
     try {
       final prefs = await SharedPreferences.getInstance();
       final user_id = prefs.getInt('user_id');
-      return await apiClient.listCart('pkb', '3', user_id!,'1');
+      return await apiClient.listCart('test', '3', user_id!,'1');
     } catch (e) {
-      print('Login ErrorPkb: $e');
+      print('Login Error: $e');
       rethrow;
     }
   }
